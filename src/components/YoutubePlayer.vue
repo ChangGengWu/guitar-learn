@@ -11,50 +11,53 @@
           id="videoURL"
           aria-describedby="videoURL"
           v-model="videoURL"
+          placeholder="Enter Youtube URL"
         />
       </div>
     </div>
-    <div class="row g-3 align-items-center mb-4">
+    <div class="row g-3 align-items-end mb-5">
       <div class="col-auto">
         <label for="startSecond" class="form-label">起始</label>
       </div>
       <div class="col-auto">
         <input
-          type="text"
+          type="number"
           class="form-control customInput"
           id="startSecond"
           aria-describedby="startSecond"
-          v-model="startSecond"
+          v-model.number="startSecond"
+          placeholder="Start"
         />
       </div>
       <div class="col-auto">
-        <label for="endSecond" class="form-label"> 結束</label>
+        <label for="endSecond" class="form-label">結束</label>
       </div>
       <div class="col-auto">
         <input
-          type="text"
+          type="number"
           class="form-control customInput"
           id="endSecond"
           aria-describedby="endSecond"
-          v-model="endSecond"
+          v-model.number="endSecond"
+          placeholder="End"
         />
       </div>
       <button class="btn btn-primary col-auto" @click="setVideo">Apply</button>
     </div>
-    <div class="row g-3 align-items-center mb-2">
+    <div class="row g-3 align-items-end mb-2">
       <div class="col-auto">
         <label for="endSecond" class="form-label">返回時間</label>
       </div>
       <div class="col-auto">
         <input
-          type="text"
+          type="number"
           class="form-control customInput"
           id="endSecond"
           aria-describedby="endSecond"
           v-model="returnSecond"
         />
       </div>
-      <button class="btn btn-primary col-auto" @click="seek">seek</button>
+      <button class="btn btn-primary col-auto" @click="seek">Seek</button>
     </div>
     {{ startSecond }}{{ endSecond }}
   </div>
@@ -81,9 +84,9 @@ export default {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       window.onYouTubeIframeAPIReady = function() {
         player = new window.YT.Player("player", {
-          height: "300",
-          width: "400",
-          videoId: "HZ5xd_3yOcQ",
+          height: "350",
+          width: "450",
+          videoId: "",
           playerVars: {
             playsinline: 1,
             start: startSecond.value,

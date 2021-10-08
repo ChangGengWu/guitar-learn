@@ -1,9 +1,10 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import VueYoutube from "vue-youtube";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "viewerjs/dist/viewer.css";
+import VueViewer from "v-viewer";
 
 createApp(App)
-  .use(router, VueYoutube)
+  .use(router, VueViewer)
   .mount("#app");
