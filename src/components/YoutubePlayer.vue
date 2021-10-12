@@ -1,67 +1,74 @@
 <template>
-  <div class="border p-2">
-    <div class="row g-3 align-items-center mb-1">
-      <div class="col-auto">
-        <label for="videoURL" class="form-label"> 網址</label>
-      </div>
-      <div class="col-auto">
-        <input
-          type="text"
-          class="form-control"
-          id="videoURL"
-          aria-describedby="videoURL"
-          v-model="videoURL"
-          placeholder="Enter Youtube URL"
-        />
-      </div>
+  <div class="border video-panel row shadow-sm">
+    <div class="video-panel-title py-2">
+      影片設定
     </div>
-    <div class="row g-3 align-items-end mb-5">
-      <div class="col-auto">
-        <label for="startSecond" class="form-label">起始</label>
+    <div class="p-2">
+      <div class="row g-2 align-items-center mb-2 mt-1">
+        <div class="col-auto">
+          <label for="videoURL" class="form-label"> 網址</label>
+        </div>
+        <div class="col-auto">
+          <input
+            type="text"
+            class="form-control"
+            id="videoURL"
+            aria-describedby="videoURL"
+            v-model="videoURL"
+            placeholder="Enter Youtube URL"
+          />
+        </div>
       </div>
-      <div class="col-auto">
-        <input
-          type="number"
-          class="form-control customInput"
-          id="startSecond"
-          aria-describedby="startSecond"
-          v-model.number="startSecond"
-          placeholder="Start"
-        />
+      <div class="row g-2 align-items-end mb-5">
+        <div class="col-auto">
+          <label for="startSecond" class="form-label">起始</label>
+        </div>
+        <div class="col-auto">
+          <input
+            type="number"
+            class="form-control customInput"
+            id="startSecond"
+            aria-describedby="startSecond"
+            v-model.number="startSecond"
+            placeholder="Start"
+          />
+        </div>
+        <div class="col-auto">
+          <label for="endSecond" class="form-label">結束</label>
+        </div>
+        <div class="col-auto">
+          <input
+            type="number"
+            class="form-control customInput"
+            id="endSecond"
+            aria-describedby="endSecond"
+            v-model.number="endSecond"
+            placeholder="End"
+          />
+        </div>
+        <button class="btn btn-primary col-auto" @click="setVideo">
+          Apply
+        </button>
       </div>
-      <div class="col-auto">
-        <label for="endSecond" class="form-label">結束</label>
+      <div class="row g-2 align-items-end mb-2">
+        <div class="col-auto">
+          <label for="endSecond" class="form-label">返回時間</label>
+        </div>
+        <div class="col-auto">
+          <input
+            type="number"
+            class="form-control customInput"
+            id="endSecond"
+            aria-describedby="endSecond"
+            v-model="returnSecond"
+          />
+        </div>
+        <button class="btn btn-primary col-auto" @click="seek">Seek</button>
       </div>
-      <div class="col-auto">
-        <input
-          type="number"
-          class="form-control customInput"
-          id="endSecond"
-          aria-describedby="endSecond"
-          v-model.number="endSecond"
-          placeholder="End"
-        />
-      </div>
-      <button class="btn btn-primary col-auto" @click="setVideo">Apply</button>
-    </div>
-    <div class="row g-3 align-items-end mb-2">
-      <div class="col-auto">
-        <label for="endSecond" class="form-label">返回時間</label>
-      </div>
-      <div class="col-auto">
-        <input
-          type="number"
-          class="form-control customInput"
-          id="endSecond"
-          aria-describedby="endSecond"
-          v-model="returnSecond"
-        />
-      </div>
-      <button class="btn btn-primary col-auto" @click="seek">Seek</button>
     </div>
     {{ startSecond }}{{ endSecond }}
   </div>
-  <div class="mt-2">
+  <div class="mt-3">
     <div id="player" keep-alive></div>
   </div>
 </template>
@@ -85,7 +92,7 @@ export default {
       window.onYouTubeIframeAPIReady = function() {
         player = new window.YT.Player("player", {
           height: "350",
-          width: "450",
+          width: "480",
           videoId: "",
           playerVars: {
             playsinline: 1,
@@ -157,5 +164,19 @@ export default {
 <style scoped>
 .customInput {
   width: 5rem;
+}
+
+.video-panel {
+  background-color: #fafafa;
+  border-radius: 5px;
+  color: #000;
+  font-size: 18px;
+}
+
+.video-panel-title {
+  background-color: #e0afa0;
+  font-size: 22px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 </style>

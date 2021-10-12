@@ -1,34 +1,40 @@
 <template>
-  <div class="row d-flex align-items-baseline border p-1 pt-3">
-    <div class="col-3 form-label">上傳樂譜</div>
-    <div class="col-7">
-      <input
-        class="form-control"
-        type="file"
-        id="formFile"
-        accept="image/*"
-        @change="previewImage"
-        multiple
-      />
-      <div class="form-text">上傳檔案限制100MB</div>
+  <div class="row shadow-sm img-upload">
+    <div class="img-upload-title py-2">
+      上傳樂譜
     </div>
-    <div class="col-2">
-      <button class="btn btn-primary" @click="add">匯入</button>
-    </div>
-    <div class="d-flex flex-wrap">
-      <div
-        v-for="(item, index) in previewList"
-        :key="index"
-        class="ms-1 me-2 mt-3 img-container"
-      >
-        <a
-          class="delete-image"
-          href="#"
-          style="display: inline;"
-          @click="deleteImg(index)"
-          >&#215;</a
+    <div
+      class="row g-2 d-flex align-items-start justify-content-center pb-3 px-3"
+    >
+      <div class="col-auto">
+        <input
+          class="form-control"
+          type="file"
+          id="formFile"
+          accept="image/*"
+          @change="previewImage"
+          multiple
+        />
+        <div class="form-text">上傳檔案限制100MB</div>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-primary" @click="add">匯入</button>
+      </div>
+      <div class="d-flex flex-wrap">
+        <div
+          v-for="(item, index) in previewList"
+          :key="index"
+          class="ms-1 me-2 img-container"
         >
-        <img :src="item" class="img-thumbnail previewImg" />
+          <a
+            class="delete-image"
+            href="#"
+            style="display: inline;"
+            @click="deleteImg(index)"
+            >&#215;</a
+          >
+          <img :src="item" class="img-thumbnail previewImg" />
+        </div>
       </div>
     </div>
   </div>
@@ -113,5 +119,23 @@ export default {
   background: #e54e4e;
   top: -11px;
   right: -11px;
+}
+
+.img-upload {
+  background-color: #fafafa;
+  border-radius: 5px;
+}
+
+.img-upload-label {
+  color: #fff;
+  font-size: 22px;
+}
+
+.img-upload-title {
+  background-color: #98c1d9;
+  color: #000;
+  font-size: 22px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 </style>
