@@ -1,12 +1,11 @@
 <template>
-  <div class="row shadow-sm img-upload">
+  <div class="row shadow-lg img-upload p-3 g-1">
     <div class="img-upload-title py-2">
+      <i class="bi bi-music-note-list"></i>
       上傳樂譜
     </div>
-    <div
-      class="row g-2 d-flex align-items-start justify-content-center pb-3 px-3"
-    >
-      <div class="col-auto">
+    <div class="row gx-3 d-flex align-items-start px-3 py-2">
+      <div class="col-5">
         <input
           class="form-control"
           type="file"
@@ -16,11 +15,11 @@
           multiple
         />
         <div class="form-text">上傳檔案限制100MB</div>
+        <div class="d-flex mt-3 justify-content-end">
+          <button class="btn btn-primary" @click="add">匯入</button>
+        </div>
       </div>
-      <div class="col-auto">
-        <button class="btn btn-primary" @click="add">匯入</button>
-      </div>
-      <div class="d-flex flex-wrap">
+      <div class="d-flex flex-wrap col-7">
         <div
           v-for="(item, index) in previewList"
           :key="index"
@@ -122,8 +121,8 @@ export default {
 }
 
 .img-upload {
-  background-color: #fafafa;
-  border-radius: 5px;
+  background-color: #ffffff;
+  border-radius: 15px;
 }
 
 .img-upload-label {
@@ -132,10 +131,12 @@ export default {
 }
 
 .img-upload-title {
-  background-color: #98c1d9;
-  color: #000;
+  text-align: left;
+  color: #344767;
   font-size: 22px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 2px;
+  /* border-left: solid 8px #000000; */
 }
 </style>

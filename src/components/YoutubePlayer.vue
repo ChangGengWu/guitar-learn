@@ -1,72 +1,107 @@
 <template>
-  <div class="border video-panel row shadow-sm">
-    <div class="video-panel-title py-2">
-      影片設定
-    </div>
-    <div class="p-2">
-      <div class="row g-2 align-items-center mb-2 mt-1">
-        <div class="col-auto">
-          <label for="videoURL" class="form-label"> 網址</label>
+  <div class="row gx-4">
+    <div class="col">
+      <div class="video-panel shadow-lg px-3 pt-3 pb-2">
+        <div class="video-panel-title py-2">
+          <i class="bi bi-play-btn"></i>
+          影片設定
         </div>
-        <div class="col-auto">
-          <input
-            type="text"
-            class="form-control"
-            id="videoURL"
-            aria-describedby="videoURL"
-            v-model="videoURL"
-            placeholder="Enter Youtube URL"
-          />
+        <div class="p-2">
+          <div class="row g-2 align-items-center mb-2 mt-1">
+            <div class="col-auto">
+              <label for="videoURL" class="form-label"> 網址</label>
+            </div>
+            <div class="col-auto">
+              <input
+                type="text"
+                class="form-control"
+                id="videoURL"
+                aria-describedby="videoURL"
+                v-model="videoURL"
+                placeholder="Youtube URL"
+              />
+            </div>
+          </div>
+          <div class="row g-2 align-items-end mb-2">
+            <div class="col-auto">
+              <label for="startSecond" class="form-label">起始</label>
+            </div>
+            <div class="col-auto">
+              <input
+                type="number"
+                class="form-control customInput"
+                id="startSecond"
+                aria-describedby="startSecond"
+                v-model.number="startSecond"
+                placeholder="Start"
+              />
+            </div>
+            <div class="col-auto">
+              <label for="endSecond" class="form-label">結束</label>
+            </div>
+            <div class="col-auto">
+              <input
+                type="number"
+                class="form-control customInput"
+                id="endSecond"
+                aria-describedby="endSecond"
+                v-model.number="endSecond"
+                placeholder="End"
+              />
+            </div>
+            <div class="d-flex w-100 justify-content-end mt-3">
+              <button class="btn btn-primary col-auto" @click="setVideo">
+                完成
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="row g-2 align-items-end mb-5">
-        <div class="col-auto">
-          <label for="startSecond" class="form-label">起始</label>
-        </div>
-        <div class="col-auto">
-          <input
-            type="number"
-            class="form-control customInput"
-            id="startSecond"
-            aria-describedby="startSecond"
-            v-model.number="startSecond"
-            placeholder="Start"
-          />
-        </div>
-        <div class="col-auto">
-          <label for="endSecond" class="form-label">結束</label>
-        </div>
-        <div class="col-auto">
-          <input
-            type="number"
-            class="form-control customInput"
-            id="endSecond"
-            aria-describedby="endSecond"
-            v-model.number="endSecond"
-            placeholder="End"
-          />
-        </div>
-        <button class="btn btn-primary col-auto" @click="setVideo">
-          Apply
-        </button>
-      </div>
-      <div class="row g-2 align-items-end mb-2">
-        <div class="col-auto">
-          <label for="endSecond" class="form-label">返回時間</label>
-        </div>
-        <div class="col-auto">
-          <input
-            type="number"
-            class="form-control customInput"
-            id="endSecond"
-            aria-describedby="endSecond"
-            v-model="returnSecond"
-          />
-        </div>
-        <button class="btn btn-primary col-auto" @click="seek">Seek</button>
       </div>
     </div>
-    {{ startSecond }}{{ endSecond }}
+    <div class="col">
+      <div class="video-panel shadow-lg p-3">
+        <div class="video-panel-title py-2">
+          <i class="bi bi-sliders"></i>
+          影片功能
+        </div>
+        <div class="p-2">
+          <ul class="video-feature mt-2">
+            <li>
+              <button class="btn video-btn btn-pause">
+                <i class="bi bi-pause"></i>
+              </button>
+            </li>
+            <li>
+              <button class="btn video-btn btn-play">
+                <i class="bi bi-play"></i>
+              </button>
+            </li>
+            <li>
+              <button class="btn video-btn btn-replay">
+                <i class="bi bi-arrow-counterclockwise"></i>
+              </button>
+            </li>
+          </ul>
+          <div class="row g-2 align-items-end mb-2 mt-3">
+            <div class="col-auto">
+              <label for="endSecond" class="form-label">返回時間</label>
+            </div>
+            <div class="col-auto">
+              <input
+                type="number"
+                class="form-control customInput"
+                id="endSecond"
+                aria-describedby="endSecond"
+                v-model="returnSecond"
+              />
+            </div>
+            <button class="btn btn-primary col-auto" @click="seek">
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="mt-3">
     <div id="player" keep-alive></div>
@@ -168,15 +203,44 @@ export default {
 
 .video-panel {
   background-color: #fafafa;
-  border-radius: 5px;
-  color: #000;
-  font-size: 18px;
+  border-radius: 15px;
 }
 
 .video-panel-title {
-  background-color: #e0afa0;
+  text-align: left;
+  color: #344767;
   font-size: 22px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 2px;
+}
+
+.video-feature {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.video-feature li {
+  margin-right: 1rem;
+}
+
+.video-btn {
+  font-size: 22px;
+}
+
+.btn-play {
+  background-color: #166ed2;
+  color: #ffffff;
+}
+.btn-pause {
+  background-color: #c20047;
+  color: #ffffff;
+}
+.btn-replay {
+  background-color: #f8a96f;
+  color: #ffffff;
 }
 </style>
