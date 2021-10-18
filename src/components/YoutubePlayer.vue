@@ -66,18 +66,21 @@
         </div>
         <div class="p-2">
           <ul class="video-feature mt-2">
+            <!-- 暫停 -->
             <li>
-              <button class="btn video-btn btn-pause">
+              <button class="btn video-btn btn-pause" @click="pauseVideo">
                 <i class="bi bi-pause"></i>
               </button>
             </li>
+            <!-- 播放 -->
             <li>
-              <button class="btn video-btn btn-play">
+              <button class="btn video-btn btn-play" @click="playVideo">
                 <i class="bi bi-play"></i>
               </button>
             </li>
+            <!-- 回放 -->
             <li>
-              <button class="btn video-btn btn-replay">
+              <button class="btn video-btn btn-replay" @click="replayVideo">
                 <i class="bi bi-arrow-counterclockwise"></i>
               </button>
             </li>
@@ -163,9 +166,16 @@ export default {
       }
     }
 
-    // function stopVideo() {
-    //   player.stopVideo();
-    // }
+    function pauseVideo() {
+      player.pauseVideo();
+    }
+
+    function playVideo() {
+      player.playVideo();
+    }
+    function replayVideo() {
+      player.seekTo(0);
+    }
 
     function seek() {
       player.seekTo(returnSecond.value);
@@ -174,6 +184,10 @@ export default {
     function getchVideoId() {
       const videoInfo = getVideoId(videoURL.value);
       videoID.value = videoInfo.id;
+    }
+
+    function setSize() {
+      player.setSize(600, 700);
     }
 
     onMounted(() => {
@@ -191,6 +205,10 @@ export default {
       videoURL,
       seek,
       returnSecond,
+      pauseVideo,
+      playVideo,
+      replayVideo,
+      setSize,
     };
   },
 };

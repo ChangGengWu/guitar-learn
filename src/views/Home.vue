@@ -50,11 +50,11 @@
       <div class="col-md-8 col-xl-7 border" v-if="mode === 'sheet'">
         <ImageView v-model:imageList="imageList" />
       </div>
-      <div class="col-md-8 col-xl-7 border" v-if="mode === 'video'">
-        影片
+      <div class="col-md-8 col-xl-7" v-if="mode === 'video'">
+        <ModeYoutubePlayer />
       </div>
-      <div class="col-md-8 col-xl-7 border" v-if="mode === 'note'">
-        筆記
+      <div class="col-md-8 col-xl-7" v-if="mode === 'note'">
+        <Note />
       </div>
       <div class="col-md-4 col-xl-5">
         <div class="px-5">
@@ -73,8 +73,10 @@
 <script>
 // @ is an alias to /src
 import YoutubePlayer from "@/components/YoutubePlayer.vue";
+import ModeYoutubePlayer from "@/components/ModeYoutubePlayer.vue";
 import ImageView from "@/components/ImageView.vue";
 import ImageUpload from "@/components/ImageUpload.vue";
+import Note from "@/components/Note.vue";
 import { ref } from "vue";
 export default {
   name: "Home",
@@ -82,6 +84,8 @@ export default {
     YoutubePlayer,
     ImageView,
     ImageUpload,
+    Note,
+    ModeYoutubePlayer,
   },
   setup() {
     const imageList = ref([]);
@@ -122,5 +126,9 @@ export default {
 a.active.nav-link {
   background-color: inherit !important;
   color: #000000;
+}
+
+.mode-area {
+  background-color: #ffffff;
 }
 </style>
