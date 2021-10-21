@@ -58,12 +58,16 @@
       </div>
       <div class="col-md-4 col-xl-5">
         <div class="px-5">
-          <div>
-            <ImageUpload v-model:imageList="imageList" />
-          </div>
-          <div class="mt-4">
-            <YoutubePlayer />
-          </div>
+          <transition name="slide-fade">
+            <div v-if="mode === 'sheet'">
+              <ImageUpload v-model:imageList="imageList" />
+            </div>
+          </transition>
+          <transition name="fade">
+            <div class="mt-4">
+              <YoutubePlayer />
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -130,5 +134,27 @@ a.active.nav-link {
 
 .mode-area {
   background-color: #ffffff;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.slide-fade-enter-active {
+  transition: all 0.5s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
 </style>

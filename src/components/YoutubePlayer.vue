@@ -1,6 +1,6 @@
 <template>
   <div class="row gx-4">
-    <div class="col">
+    <div class="col-6">
       <div class="video-panel shadow-lg px-3 pt-3 pb-2">
         <div class="video-panel-title py-2">
           <i class="bi bi-play-btn"></i>
@@ -58,55 +58,58 @@
         </div>
       </div>
     </div>
-    <div class="col">
-      <div class="video-panel shadow-lg p-3">
-        <div class="video-panel-title py-2">
-          <i class="bi bi-sliders"></i>
-          影片功能
-        </div>
-        <div class="p-2">
-          <ul class="video-feature mt-2">
-            <!-- 暫停 -->
-            <li>
-              <button class="btn video-btn btn-pause" @click="pauseVideo">
-                <i class="bi bi-pause"></i>
+    <transition name="fade">
+      <div class="col-6" v-if="applyStatus">
+        <div class="video-panel shadow-lg p-3">
+          <div class="video-panel-title py-2">
+            <i class="bi bi-sliders"></i>
+            影片功能
+          </div>
+          <div class="p-2">
+            <ul class="video-feature mt-2">
+              <!-- 暫停 -->
+              <li>
+                <button class="btn video-btn btn-pause" @click="pauseVideo">
+                  <i class="bi bi-pause"></i>
+                </button>
+              </li>
+              <!-- 播放 -->
+              <li>
+                <button class="btn video-btn btn-play" @click="playVideo">
+                  <i class="bi bi-play"></i>
+                </button>
+              </li>
+              <!-- 回放 -->
+              <li>
+                <button class="btn video-btn btn-replay" @click="replayVideo">
+                  <i class="bi bi-arrow-counterclockwise"></i>
+                </button>
+              </li>
+            </ul>
+            <div class="row g-2 align-items-end mb-2 mt-3">
+              <div class="col-auto">
+                <label for="endSecond" class="form-label">返回時間</label>
+              </div>
+              <div class="col-auto">
+                <input
+                  type="number"
+                  class="form-control customInput"
+                  id="endSecond"
+                  aria-describedby="endSecond"
+                  v-model="returnSecond"
+                />
+              </div>
+              <button class="btn btn-primary col-auto" @click="seek">
+                <i class="bi bi-arrow-right"></i>
               </button>
-            </li>
-            <!-- 播放 -->
-            <li>
-              <button class="btn video-btn btn-play" @click="playVideo">
-                <i class="bi bi-play"></i>
-              </button>
-            </li>
-            <!-- 回放 -->
-            <li>
-              <button class="btn video-btn btn-replay" @click="replayVideo">
-                <i class="bi bi-arrow-counterclockwise"></i>
-              </button>
-            </li>
-          </ul>
-          <div class="row g-2 align-items-end mb-2 mt-3">
-            <div class="col-auto">
-              <label for="endSecond" class="form-label">返回時間</label>
             </div>
-            <div class="col-auto">
-              <input
-                type="number"
-                class="form-control customInput"
-                id="endSecond"
-                aria-describedby="endSecond"
-                v-model="returnSecond"
-              />
-            </div>
-            <button class="btn btn-primary col-auto" @click="seek">
-              <i class="bi bi-arrow-right"></i>
-            </button>
           </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
-  <div class="mt-3">
+
+  <div class="row mt-3 px-2 justify-content-center">
     <div id="player" keep-alive></div>
   </div>
 </template>
@@ -120,6 +123,7 @@ export default {
     const endSecond = ref();
     const videoID = ref("");
     const returnSecond = ref();
+    const applyStatus = ref(false);
 
     let player;
     function youtubeLoader() {
@@ -129,7 +133,7 @@ export default {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       window.onYouTubeIframeAPIReady = function() {
         player = new window.YT.Player("player", {
-          height: "350",
+          height: "370",
           width: "480",
           videoId: "",
           playerVars: {
@@ -146,6 +150,7 @@ export default {
     }
 
     function setVideo() {
+      applyStatus.value = true;
       getchVideoId();
       player.loadVideoById({
         videoId: videoID.value,
@@ -192,7 +197,6 @@ export default {
 
     onMounted(() => {
       youtubeLoader();
-      console.log("123");
     });
 
     return {
@@ -209,6 +213,7 @@ export default {
       playVideo,
       replayVideo,
       setSize,
+      applyStatus,
     };
   },
 };
@@ -260,5 +265,14 @@ export default {
 .btn-replay {
   background-color: #f8a96f;
   color: #ffffff;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

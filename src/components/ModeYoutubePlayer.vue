@@ -1,5 +1,5 @@
 <template>
-  <div class="row gx-4">
+  <div class="row gx-4 justify-content-center">
     <div class="col-7">
       <div class="video-panel shadow-lg px-3 pt-2 pb-1">
         <div class="video-panel-title py-1">
