@@ -157,4 +157,8 @@ a.active.nav-link {
   transform: translateX(20px);
   opacity: 0;
 }
+
+.transitrion {
+  transition: all 2s ease;
+}
 </style>

@@ -17,6 +17,7 @@
     "vue-loading-overlay": "4.0",
     "vue-router": "^4.0.0-0",
     "vue-youtube": "^1.4.0",
+    "vue3-markdown-it": "^1.0.9",
     "youtube-vue3": "^0.1.10"
   },
   "devDependencies": {
