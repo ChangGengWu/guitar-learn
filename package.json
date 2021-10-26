@@ -10,12 +10,15 @@
   "dependencies": {
     "bootstrap": "^5.1.2",
     "core-js": "^3.6.5",
+    "file-saver": "^2.0.5",
     "get-video-id": "^3.4.1",
+    "github-markdown-css": "^5.0.0",
     "src": "^1.1.2",
     "v-viewer": "^3.0.10",
     "vue": "^3.0.0",
     "vue-loading-overlay": "4.0",
     "vue-router": "^4.0.0-0",
+    "vue-simplemde": "^2.0.0",
     "vue-youtube": "^1.4.0",
     "vue3-markdown-it": "^1.0.9",
     "youtube-vue3": "^0.1.10"

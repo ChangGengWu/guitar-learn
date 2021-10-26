@@ -8,17 +8,19 @@
   </nav>
   <div class="container-fluid px-3">
     <div class="row mt-4 g-0">
+      <!-- feature navigator -->
       <div class="col-md-8 col-xl-7 mb-3">
         <ul class="nav nav-tabs">
           <li class="nav-item mode-tab" aria-current="page">
             <a
-              class="nav-link sheet-link"
+              class="nav-link note-link"
               aria-current="page"
               href="#"
-              @click.prevent="mode = 'sheet'"
-              :class="{ active: mode === 'sheet' }"
+              @click.prevent="mode = 'note'"
+              :class="{ active: mode === 'note' }"
             >
-              <i class="bi bi-music-note-list"></i> 樂譜</a
+              <i class="bi bi-journal-text"></i>
+              筆記</a
             >
           </li>
           <li class="nav-item mode-tab" aria-current="page">
@@ -33,20 +35,21 @@
               影片</a
             >
           </li>
+
           <li class="nav-item mode-tab" aria-current="page">
             <a
-              class="nav-link note-link"
+              class="nav-link sheet-link"
               aria-current="page"
               href="#"
-              @click.prevent="mode = 'note'"
-              :class="{ active: mode === 'note' }"
+              @click.prevent="mode = 'sheet'"
+              :class="{ active: mode === 'sheet' }"
             >
-              <i class="bi bi-journal-text"></i>
-              筆記</a
+              <i class="bi bi-music-note-list"></i> 樂譜</a
             >
           </li>
         </ul>
       </div>
+      <!-- main -->
       <div class="col-md-8 col-xl-7 border" v-if="mode === 'sheet'">
         <ImageView v-model:imageList="imageList" />
       </div>
@@ -56,6 +59,7 @@
       <div class="col-md-8 col-xl-7" v-if="mode === 'note'">
         <Note />
       </div>
+      <!-- panel -->
       <div class="col-md-4 col-xl-5">
         <div class="px-5">
           <transition name="slide-fade">
@@ -64,7 +68,7 @@
             </div>
           </transition>
           <transition name="fade">
-            <div class="mt-4">
+            <div class="mt-3">
               <YoutubePlayer />
             </div>
           </transition>
@@ -93,7 +97,7 @@ export default {
   },
   setup() {
     const imageList = ref([]);
-    const mode = ref("sheet");
+    const mode = ref("note");
 
     return {
       imageList,
