@@ -1,7 +1,9 @@
 <template>
   <div class="d-flex justify-content-end mb-2">
     <div class="me-3">
-      <button class="btn btn-danger">
+      {{ errorMessage }}
+      <input type="file" ref="file" class="d-none" @change="handleFileUpload" />
+      <button class="btn btn-danger" @click="$refs.file.click()">
         <i class="bi bi-upload me-2"></i>上傳
       </button>
     </div>
@@ -34,17 +36,43 @@ export default {
   },
   setup() {
     const source = ref("# Hello World!");
+    const file = ref(null);
+    const errorMessage = ref("");
     // const mdMode = ref("all");
 
+    //輸出md檔
     function exportMdFile() {
       var FileSaver = require("file-saver");
       var blob = new Blob([source.value], { type: "text/plain;charset=utf-8" });
       FileSaver.saveAs(blob, "MarkdownFile.md");
     }
+
+    //上傳md檔
+    function handleFileUpload(event) {
+      file.value = file.value.files[0];
+      console.log(file.value.name);
+      var input = event.target;
+      if (file.value.name.includes(".md") || file.value.name.includes(".txt")) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+          source.value = e.target.result;
+          errorMessage.value = "";
+          // console.log(e.target.result);
+        };
+      } else {
+        errorMessage.value = "不支援的檔案類型(僅接受 .md .txt 檔案格式)";
+        console.log("不支援的檔案類型");
+      }
+      reader.onerror = (err) => console.log(err);
+      reader.readAsText(input.files[0]);
+    }
     return {
       source,
       saveAs,
       exportMdFile,
+      handleFileUpload,
+      file,
+      errorMessage,
       // mdMode,
     };
   },
